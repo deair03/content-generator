@@ -1,0 +1,15 @@
+.gradient-text {
+    background: linear-gradient(90deg, #ef4444, #10b981, #3b82f6);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .gradient-background {
+    background: linear-gradient(to bottom right, #8a2be2, #8a2be2 50%, #3b82f6);
+    color: white; /* Text color */
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Optional text shadow */
+}
