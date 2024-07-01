@@ -1,10 +1,10 @@
 import React from "react";
-import { FileClock, Home, Settings, Search, WalletCards } from "lucide-react";
+import { FileClock, Home, Settings, WalletCards } from "lucide-react";
 
 function Sidebar() {
   return (
     <>
-      <div className="flex">
+      <div>
         {/* Sidebar */}
         <aside
           id="default-sidebar"
@@ -93,27 +93,6 @@ function Sidebar() {
             </ul>
           </div>
         </aside>
-
-        {/* Main Content */}
-        <div className="flex-1 text-end ml-64 p-8 ">
-          <span className="rounded-full p-1 text-white px-3 bg-[#00589b]">
-            L
-          </span>
-        </div>
-      </div>
-      <div className="gradient-background flex flex-col justify-center items-center text-white">
-        <h2 className="text-3xl font-bold">Browse All Templates</h2>
-        <p>What would you like to create today?</p>
-        <div className="w-full  flex justify-center">
-          <div className="flex gap-2 items-center p-2 border rounded-md bg-white my-5 w-[50%]">
-          <Search style={{stroke:'#8a2be2'}} />
-            <input
-              placeholder="Search"
-              className="bg-transparent w-full outline-none text-black"
-              type="text"
-            />
-          </div>
-        </div>
       </div>
     </>
   );

@@ -1,9 +1,10 @@
-import Sidebar from "../components/Sidebar";
+import MainContent from "../components/MainContent";
+
 
 function Home(){
     return(
         <div>
-        <Sidebar/>
+        <MainContent />
         </div>
     )
 }
