@@ -1,10 +1,11 @@
 import DetailedPageContent from "../components/DetailedPageContent";
-
+import { Link } from "react-router-dom";
 function DetailedPage() {
   return (
     <div className="p-6">
       <div className="ml-64">
-        <button className="bg-[#704ef8] text-white flex items-center justify-center rounded-md text-sm font-medium shadow hover:bg-[#7a61e1] h-9 px-4 py-2">
+       <Link to={"/"}>
+       <button className="bg-[#704ef8] text-white flex items-center justify-center rounded-md text-sm font-medium shadow hover:bg-[#7a61e1] h-9 px-4 py-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -22,6 +23,7 @@ function DetailedPage() {
           </svg>
           Back
         </button>
+       </Link>
       </div>
       <div>
         <DetailedPageContent />

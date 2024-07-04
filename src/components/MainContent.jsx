@@ -18,14 +18,14 @@ function MainContent() {
             <Search style={{ stroke: "#8a2be2" }} />
             <input
               placeholder="Search"
-              className=" placeholder:text-lg placeholder:font-medium  bg-transparent w-full outline-none text-black"
+              className="text-lg font-normal placeholder:text-lg placeholder:font-medium  bg-transparent w-full outline-none text-black"
               type="text"
             />
           </div>
         </div>
       </div>
       <div className="p-10 grid lg:grid-cols-4 grid-cols-2 gap-5 ">
-       {cardDetails.map(items => <Cards icon={items.icon} name={items.name} description={items.description} key={items} />) }
+       {cardDetails.map(item => <Cards item={item} key={item.slug} />) }
       </div>
     </div>
   );
