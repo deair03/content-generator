@@ -1,32 +1,33 @@
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import AI_TOOLS from "../core/Tools.Contant";
-import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
 function InputSection({ selectedTool, setAiResponse }) {
   const { register, handleSubmit } = useForm();
- 
+  const [loader, setLoader] = useState(false);
 
+ 
   const createContent = async (data) => {
     try {
       let prompt = selectedTool.aiPrompt;
       const form = selectedTool.form;
-      console.log(data)
-      for(const field of form){
-        prompt = prompt.replace(`{${field.name}}`,  data[field.name]);
-       
+      console.log(data);
+      for (const field of form) {
+        prompt = prompt.replace(`{${field.name}}`, data[field.name]);
       }
-      const res = await fetch(
-       `https://ai-api.sashikumar.dev/generate`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({prompt:prompt}),
-        }
-      );
+      setLoader(true);
+      const res = await fetch(`https://ai-api.sashikumar.dev/generate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: prompt }),
+      });
       const aiResponse = await res.text();
       setAiResponse(aiResponse);
+     
     } catch (error) {
       console.log(error);
     }
+    setLoader(false);
   };
 
   return (
@@ -59,8 +60,8 @@ function InputSection({ selectedTool, setAiResponse }) {
                 <div>
                   <div className="my-2 flex flex-col gap-2 mb-7">
                     <label className="font-bold">{itemField.label}</label>
-                    <textarea 
-                    {...register(itemField.name)}
+                    <textarea
+                      {...register(itemField.name)}
                       className="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                       name={itemField.name}
                       rows="5"
@@ -75,12 +76,26 @@ function InputSection({ selectedTool, setAiResponse }) {
               )}
             </div>
           ))}
-          <button
-            className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-white bg-[#704ef8] shadow hover:bg-[#7a61e1] h-9 px-4 w-full py-6"
-            type="submit"
-          >
-            Generate Content
-          </button>
+          {loader ? (
+            <button
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-white bg-[#9f93cd] shadow hover:bg-[#7a61e1] h-9 px-4 w-full py-6"
+              type="submit"
+            >
+              <img
+                className="w-6 mr-1"
+                src="../../public/Rolling@1x-1.0s-200px-200px.svg"
+                alt=""
+              />
+              Generate Content
+            </button>
+          ) : (
+            <button
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-white bg-[#704ef8] shadow hover:bg-[#7a61e1] h-9 px-4 w-full py-6"
+              type="submit"
+            >
+              Generate Content
+            </button>
+          )}
         </form>
       </div>
     </>
